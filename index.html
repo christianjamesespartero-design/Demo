@@ -1,0 +1,286 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>WorkPluse</title>
+
+<style>
+/* RESET */
+* {
+  box-sizing: border-box;
+  margin: 0;
+  padding: 0;
+}
+
+body {
+  font-family: Arial, sans-serif;
+  scroll-behavior: smooth;
+  overflow-x: hidden;
+}
+
+/* LOGIN BUTTON */
+#loginBtn {
+  position: fixed;
+  top: 15px;
+  right: 15px;
+  padding: 10px 20px;
+  font-size: 14px;
+  border: none;
+  border-radius: 25px;
+  background: #ff6b6b;
+  color: white;
+  cursor: pointer;
+  z-index: 10;
+}
+
+/* SECTIONS */
+section {
+  height: 100vh;
+  padding: 20px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  text-align: center;
+  color: white;
+  position: relative;
+  background-size: cover;
+  background-position: center;
+}
+
+section::before {
+  content: '';
+  position: absolute;
+  inset: 0;
+  background: rgba(0,0,0,0.45);
+}
+
+.content {
+  position: relative;
+  z-index: 1;
+  max-width: 90%;
+  padding: 20px;
+  background: rgba(0,0,0,0.55);
+  border-radius: 15px;
+}
+
+h2 {
+  margin-bottom: 10px;
+  font-size: 24px;
+}
+
+p {
+  font-size: 16px;
+  line-height: 1.5;
+}
+
+/* INFO SECTION */
+.info-section {
+  min-height: 100vh;
+  padding: 40px 15px;
+  background: linear-gradient(135deg, #1a2a6c, #b21f1f, #fdbb2d);
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+}
+
+.info-card {
+  background: rgba(255,255,255,0.12);
+  padding: 20px;
+  border-radius: 15px;
+  margin: 12px 0;
+  width: 100%;
+  max-width: 500px;
+}
+
+/* SCROLL DOTS */
+.scroll-indicator {
+  position: fixed;
+  right: 10px;
+  top: 50%;
+  transform: translateY(-50%);
+  display: flex;
+  flex-direction: column;
+  gap: 10px;
+  z-index: 15;
+}
+
+.scroll-indicator span {
+  width: 14px;
+  height: 14px;
+  background: rgba(255,255,255,0.6);
+  border-radius: 50%;
+}
+
+.scroll-indicator span.active {
+  background: #ff6b6b;
+  transform: scale(1.4);
+}
+
+/* OVERLAY */
+#overlay {
+  display: none;
+  position: fixed;
+  inset: 0;
+  background: rgba(0,0,0,0.6);
+  z-index: 19;
+}
+
+/* LOGIN MODAL */
+#loginForm {
+  display: none;
+  position: fixed;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+  width: 90%;
+  max-width: 350px;
+  background: white;
+  border-radius: 15px;
+  padding: 50px 25px 30px;
+  box-shadow: 0 10px 25px rgba(0,0,0,0.3);
+  z-index: 20;
+}
+
+/* CLOSE BUTTON */
+#closeForm {
+  position: absolute;
+  top: 12px;
+  right: 15px;
+  font-size: 24px;
+  background: none;
+  border: none;
+  cursor: pointer;
+  color: #666;
+}
+
+#loginForm h2 {
+  margin-bottom: 15px;
+  color: #333;
+  font-size: 22px;
+}
+
+/* INPUTS */
+#loginForm input {
+  width: 100%;
+  padding: 12px;
+  margin: 10px 0;
+  border-radius: 8px;
+  border: 1px solid #ccc;
+  font-size: 14px;
+}
+
+/* SUBMIT BUTTON */
+.submit-btn {
+  width: 100%;
+  padding: 12px;
+  margin-top: 12px;
+  border: none;
+  border-radius: 25px;
+  background: #ff6b6b;
+  color: white;
+  font-size: 15px;
+}
+
+/* MOBILE SMALL SCREENS */
+@media (max-width: 480px) {
+  h2 { font-size: 20px; }
+  p { font-size: 14px; }
+  #loginBtn { font-size: 13px; padding: 8px 16px; }
+}
+</style>
+</head>
+
+<body>
+
+<button id="loginBtn">Log In</button>
+
+<div class="scroll-indicator">
+  <span class="active"></span>
+  <span></span>
+  <span></span>
+  <span></span>
+</div>
+
+<section style="background-image:url('https://images.unsplash.com/photo-1504384308090-c894fdcc538d');">
+  <div class="content">
+    <h2>Manage Stress</h2>
+    <p>Take short breaks during work to refresh your mind.</p>
+  </div>
+</section>
+
+<section style="background-image:url('https://images.unsplash.com/photo-1517248135467-4c7edcad34c4');">
+  <div class="content">
+    <h2>Stay Hydrated</h2>
+    <p>Drinking water regularly helps maintain energy levels.</p>
+  </div>
+</section>
+
+<section style="background-image:url('https://images.unsplash.com/photo-1507525428034-b723cf961d3e');">
+  <div class="content">
+    <h2>Sleep Well</h2>
+    <p>Quality sleep improves mood and focus.</p>
+  </div>
+</section>
+
+<section class="info-section">
+  <div class="info-card">
+    <h3>About WorkPluse</h3>
+    <p>Helping people manage workplace stress.</p>
+  </div>
+  <div class="info-card">
+    <h3>Our Mission</h3>
+    <p>Promote healthy work habits and balance.</p>
+  </div>
+</section>
+
+<div id="overlay"></div>
+
+<div id="loginForm">
+  <button id="closeForm">&times;</button>
+  <h2>Log In</h2>
+  <input type="text" placeholder="Username">
+  <input type="password" placeholder="Password">
+  <button class="submit-btn">Submit</button>
+</div>
+
+<script>
+const loginBtn = document.getElementById("loginBtn");
+const loginForm = document.getElementById("loginForm");
+const closeForm = document.getElementById("closeForm");
+const overlay = document.getElementById("overlay");
+const dots = document.querySelectorAll(".scroll-indicator span");
+const sections = document.querySelectorAll("section");
+
+loginBtn.onclick = () => {
+  loginForm.style.display = "block";
+  overlay.style.display = "block";
+};
+
+closeForm.onclick = closeModal;
+overlay.onclick = closeModal;
+
+function closeModal() {
+  loginForm.style.display = "none";
+  overlay.style.display = "none";
+}
+
+window.addEventListener("scroll", () => {
+  let current = 0;
+  sections.forEach((sec, i) => {
+    if (pageYOffset >= sec.offsetTop - window.innerHeight / 2) {
+      current = i;
+    }
+  });
+  dots.forEach(dot => dot.classList.remove("active"));
+  if (dots[current]) dots[current].classList.add("active");
+});
+
+dots.forEach((dot, i) => {
+  dot.onclick = () => sections[i].scrollIntoView({ behavior: "smooth" });
+});
+</script>
+
+</body>
+</html>
